@@ -96,6 +96,6 @@ void MyTimer_PWM( TIM_TypeDef * Timer , int Channel ) {
 	}
 }
 
-void set_pulse_pwm(TIM_TypeDef * Timer , int pulse ){
-Timer->CCR1=(Timer->ARR*pulse)/100;
+void set_pulse_pwm(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR1=(((Timer->ARR)+1)*rappCyclique)/100;
 }
