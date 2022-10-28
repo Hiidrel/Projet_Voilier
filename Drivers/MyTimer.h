@@ -39,4 +39,7 @@ void MyTimer_ActiveIT ( TIM_TypeDef * Timer , uint32_t Prio , void (*IT_function
 //PMW
 
 void MyTimer_PWM( TIM_TypeDef * Timer , int Channel ) ;
-void set_pulse_pwm(TIM_TypeDef * Timer , int pulse );
+void set_pulse_pwm_CH1(TIM_TypeDef * Timer , int pulse );
+void set_pulse_pwm_CH2(TIM_TypeDef * Timer , int pulse );
+void set_pulse_pwm_CH3(TIM_TypeDef * Timer , int pulse );
+void set_pulse_pwm_CH4(TIM_TypeDef * Timer , int pulse );
