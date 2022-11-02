@@ -16,8 +16,11 @@ void MyTimer_Base_Init( MyTimer_Struct_TypeDef * Timer ){
 	}else if (Timer->Timer == TIM4) {
 		RCC -> APB1ENR |= RCC_APB1ENR_TIM4EN;
 	}
-	Timer->Timer->ARR = Timer->ARR;
-	Timer->Timer->PSC = Timer->PSC;
+	Timer->Timer->CR1 |= (0x01<<0);
+	Timer->Timer->ARR &= ~(0xFFFF<<0);
+	Timer->Timer->ARR |= (Timer->ARR<<0);
+	Timer->Timer->PSC |= ~(0xFFFF<<0);
+	Timer->Timer->PSC |= (Timer->PSC<<0);
 	
 }
 
@@ -96,9 +99,19 @@ void MyTimer_PWM( TIM_TypeDef * Timer , int Channel ) {
 			Timer->CCER|=TIM_CCER_CC4E;
 				break;
 
-	}
+	} //a revoir parce que ne l'enable pas tres bien, erreur de registre
 }
 
-void set_pulse_pwm(TIM_TypeDef * Timer , int rappCyclique ){
+void set_pulse_pwm_CH1(TIM_TypeDef * Timer , int rappCyclique ){
 Timer->CCR1=(((Timer->ARR)+1)*rappCyclique)/100;
+}
+
+void set_pulse_pwm_CH2(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR2=(((Timer->ARR)+1)*rappCyclique)/100;
+}
+void set_pulse_pwm_CH3(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR3=(((Timer->ARR)+1)*rappCyclique)/100;
+}
+void set_pulse_pwm_CH4(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR4=(((Timer->ARR)+1)*rappCyclique)/100;
 }
