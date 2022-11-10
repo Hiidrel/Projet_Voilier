@@ -44,6 +44,6 @@ void UART_Send (USART_TypeDef * USART, char Data) ;
 * @Note : Reception de données
 **************************************************************************************************
 */
-void UART_Receive (USART_TypeDef * USART) ;
+char UART_Receive (USART_TypeDef * USART) ;
 
 #endif

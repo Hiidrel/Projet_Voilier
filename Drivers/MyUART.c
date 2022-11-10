@@ -1,4 +1,4 @@
-#include "Driver_UART.h"
+#include "MyUART.h"
 
 void (*		IT_function_UART1)(void);
 void (*		IT_function_UART2)(void);
@@ -20,15 +20,15 @@ void UART_Init( USART_TypeDef * USART, int BaudRate){
 	if (USART == USART1){
 		RCC ->APB2ENR |= RCC_APB2ENR_USART1EN;
 		USART->BRR = (int) (72000000/(BaudRate));
-		USART->BRR = BaudRate;
+		//USART->BRR = BaudRate ;
 	}
 	else if (USART == USART2){
 		RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
-		USART->BRR |= (int) (36000000/(16*BaudRate));
+		USART->BRR |= (int) (36000000/(BaudRate));
 	}
 	else if (USART == USART3){
 		RCC->APB1ENR |= RCC_APB1ENR_USART3EN;
-		USART->BRR |= (int) (36000000/(16*BaudRate));
+		USART->BRR |= (int) (36000000/(BaudRate));
 	}
 	
 	//Transmitter Enable
@@ -72,6 +72,4 @@ void UART_ActiveIT (USART_TypeDef * USART, uint32_t Prio, void (*IT_function)(vo
 	}
 	
 }
-
-
 
