@@ -1,9 +1,5 @@
 #include "MyTimer.h"
 
-void (*	IT_function1)(void);
-void (*	IT_function2)(void);
-void (*	IT_function3)(void);
-void (*	IT_function4)(void);
 
 void MyTimer_Base_Init( MyTimer_Struct_TypeDef * Timer ){
 	
@@ -24,25 +20,25 @@ void MyTimer_Base_Init( MyTimer_Struct_TypeDef * Timer ){
 	
 }
 
-void TIM1_CC_IRQHandler (void){
+void TIM1_CC_IRQHandler (void (*IT_function) (void)){
 	TIM1->SR &= ~(TIM_SR_UIF);
 	
-	IT_function1();
+	IT_function();
 }
 
-void TIM2_IRQHandler  (void) {
+void TIM2_IRQHandler (void (*IT_function) (void)) {
 	TIM2->SR &= ~(TIM_SR_UIF) ;
-	IT_function2();
+	IT_function();
 }
 
-void TIM3_IRQHandler  (void) {
+void TIM3_IRQHandler (void (*IT_function) (void)) {
 	TIM3->SR &= ~(TIM_SR_UIF);
-	IT_function3();
+	IT_function();
 }
 
-void TIM4_IRQHandler (void) {
+void TIM4_IRQHandler(void (*IT_function) (void)) {
 	TIM4->SR &= ~(TIM_SR_UIF);
-	IT_function4();
+	IT_function();
 }
 
 void MyTimer_ActiveIT (TIM_TypeDef * Timer, uint32_t Prio,void (*IT_function ) ( void )){
@@ -52,22 +48,23 @@ void MyTimer_ActiveIT (TIM_TypeDef * Timer, uint32_t Prio,void (*IT_function ) (
 	if (Timer == TIM1){
 			NVIC_EnableIRQ(TIM1_UP_IRQn);
 			NVIC_SetPriority(TIM1_UP_IRQn, Prio);
-		IT_function1= IT_function;
+		TIM1_CC_IRQHandler(IT_function );
 	}
 	else	if (Timer == TIM2){
 			NVIC_EnableIRQ(TIM2_IRQn);
 			NVIC_SetPriority(TIM2_IRQn, Prio);
-			IT_function2=IT_function;
+			TIM2_IRQHandler(IT_function);
 	}
 	else if (Timer == TIM3){
 		NVIC_EnableIRQ(TIM3_IRQn);
 		NVIC_SetPriority(TIM3_IRQn, Prio);
-		IT_function3=IT_function;
+		TIM3_IRQHandler(IT_function);
 	}
 	else if (Timer == TIM4){
 		NVIC_EnableIRQ(TIM4_IRQn);
 		NVIC_SetPriority(TIM4_IRQn, Prio);
-		IT_function4=IT_function;	}
+		TIM4_IRQHandler(IT_function);
+	}
 }
 
 
@@ -99,13 +96,12 @@ void MyTimer_PWM( TIM_TypeDef * Timer , int Channel ) {
 			Timer->CCER|=TIM_CCER_CC4E;
 				break;
 
-	} //a revoir parce que ne l'enable pas tres bien, erreur de registre
+	}
 }
 
 void set_pulse_pwm_CH1(TIM_TypeDef * Timer , int rappCyclique ){
 Timer->CCR1=(((Timer->ARR)+1)*rappCyclique)/100;
 }
-
 void set_pulse_pwm_CH2(TIM_TypeDef * Timer , int rappCyclique ){
 Timer->CCR2=(((Timer->ARR)+1)*rappCyclique)/100;
 }
