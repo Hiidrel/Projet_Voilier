@@ -1,25 +1,23 @@
 #include "MyUART.h"
+#include "MyGPIO.h"
 
 void (*		IT_function_UART1)(void);
 void (*		IT_function_UART2)(void);
 void (*		IT_function_UART3)(void);
+MyGPIO_Struct_TypeDef GPIOA9 = { GPIOA, 9, AltOut_Ppull}; //Envoi
 
+MyGPIO_Struct_TypeDef GPIOA10 = { GPIOA, 10, In_Floating}; //Reception
 
 void UART_Init( USART_TypeDef * USART, int BaudRate){
 	
-	//Enable USART
-	USART->CR1 |= USART_CR1_UE;
-	
-	//Word Length : 0: 1 Start bit, 8 Data bits, n Stop bit
-	USART->CR1 &= ~(USART_CR1_M);
-	
-	//STOP bits : 1 stop bit
-	USART->CR2 &= ~(USART_CR2_STOP);
+
 	
 	//Baud Rate and Clock Activation
 	if (USART == USART1){
 		RCC ->APB2ENR |= RCC_APB2ENR_USART1EN;
 		USART->BRR = (int) (72000000/(BaudRate));
+		MyGPIO_Init(&GPIOA9);
+		MyGPIO_Init(&GPIOA10);
 		//USART->BRR = BaudRate ;
 	}
 	else if (USART == USART2){
@@ -31,6 +29,15 @@ void UART_Init( USART_TypeDef * USART, int BaudRate){
 		USART->BRR |= (int) (36000000/(BaudRate));
 	}
 	
+		//Enable USART
+	USART->CR1 |= USART_CR1_UE;
+	
+	//Word Length : 0: 1 Start bit, 8 Data bits, n Stop bit
+	USART->CR1 &= ~(USART_CR1_M);
+	
+	//STOP bits : 1 stop bit
+	USART->CR2 &= ~(USART_CR2_STOP);
+	
 	//Transmitter Enable
 	USART->CR1 |= USART_CR1_TE;
 	
@@ -40,14 +47,22 @@ void UART_Init( USART_TypeDef * USART, int BaudRate){
 }
 
 void UART_Send (USART_TypeDef * USART, char Data){
-	USART->DR = Data;
-	
-	while (!(USART->SR & USART_SR_TC)){
-		
+
+		while (!(USART->SR & USART_SR_TXE));
+		USART->DR = Data;
+}
+
+
+void UART_Send_Str (USART_TypeDef * USART, char* Data){
+	while (*Data != '\0'){
+		UART_Send(USART, *Data);
+		Data++;
 	}
 }
+
+
 char UART_Receive (USART_TypeDef * USART){
- return (signed char) USART->DR ;
+	return (signed char) USART->DR ;
 }
 
 void UART_ActiveIT (USART_TypeDef * USART, uint32_t Prio, void (*IT_function)(void)){

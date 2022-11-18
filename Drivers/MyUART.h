@@ -39,6 +39,15 @@ void UART_Send (USART_TypeDef * USART, char Data) ;
 
 /*
 **************************************************************************************************
+* @brief UART_Send_Str
+* @param : 
+* @Note : Envoi de données
+**************************************************************************************************
+*/
+void UART_Send_Str (USART_TypeDef * USART, char* Data) ;
+
+/*
+**************************************************************************************************
 * @brief UART_Receive
 * @param : 
 * @Note : Reception de données
