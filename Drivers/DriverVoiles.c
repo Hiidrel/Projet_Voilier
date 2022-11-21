@@ -8,19 +8,18 @@ MyTimer_Struct_TypeDef TIMER4={TIM4, 9999, 143};
 
 void initGPIOTimerPWM(void)
 {
-	RCC->APB2ENR |= (0x01 << 2) | (0x01 << 3) | (0x01 << 4);
 	MyGPIO_Init(&GPIO_B8);
 	MyTimer_Base_Init(&TIMER4);
 	MyTimer_PWM(TIM4,3);
 }
 
 
-int angleToRapportCyclique(char angle)
+int angleToRapportCyclique(int angle)
 {
 	return (((angle/18)+5)*10);
 }
 
-void controleServoMoteur(char	angle)
+void controleServoMoteur(int angle)
 {
 	set_pulse_pwm_CH3(TIM4,angleToRapportCyclique(angle));
 }

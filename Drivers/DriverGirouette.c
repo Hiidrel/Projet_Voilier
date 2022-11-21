@@ -9,9 +9,9 @@ MyTimer_Struct_TypeDef TIMER3={TIM3, 1440, 0};
 
 
 
-void Init_Incrementation(void)
+void init_Incrementation(void)
 {
-	RCC->APB2ENR |= (0x01 << 2) | (0x01 << 3) | (0x01 << 4);
+	
 	MyGPIO_Init(&GPIO_A6);
 	MyGPIO_Init(&GPIO_A7);
 	MyGPIO_Init(&GPIO_B2);
@@ -27,5 +27,5 @@ void Init_Incrementation(void)
 
 int angleGirouette(void)
 {
-	return ((TIM3->CNT)/4);
+	return ((TIM3->CNT) >> 2);
 }

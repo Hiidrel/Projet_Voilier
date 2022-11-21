@@ -6,7 +6,7 @@
 //PA6 : TIM3 CH1 TI1
 //PA7 : TIM3 CH2 TI2
 
-void Init_Incrementation(void);
+void init_Incrementation(void);
 
 int angleGirouette(void);
 

@@ -3,9 +3,9 @@
 
 	void initGPIOTimerPWM(void);
 	
-	int angleToRapportCyclique(char angle);
+	int angleToRapportCyclique(int angle);
 	
-	void controleServoMoteur(char angle);
+	void controleServoMoteur(int angle);
 
 
 

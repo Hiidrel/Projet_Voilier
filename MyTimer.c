@@ -1,4 +1,4 @@
-#include "Driver_Timer.h"
+#include "MyTimer.h"
 
 
 void MyTimer_Base_Init( MyTimer_Struct_TypeDef * Timer ){
@@ -7,13 +7,16 @@ void MyTimer_Base_Init( MyTimer_Struct_TypeDef * Timer ){
 		RCC -> APB2ENR |= RCC_APB2ENR_TIM1EN;
 	}else if (Timer->Timer == TIM2) {
 		RCC -> APB1ENR |= RCC_APB1ENR_TIM2EN;
-	}else if (Timer->Timer == TIM13) {
+	}else if (Timer->Timer == TIM3) {
 		RCC -> APB1ENR |= RCC_APB1ENR_TIM3EN;
 	}else if (Timer->Timer == TIM4) {
 		RCC -> APB1ENR |= RCC_APB1ENR_TIM4EN;
 	}
-	Timer->Timer->ARR = Timer->ARR;
-	Timer->Timer->PSC = Timer->PSC;
+	Timer->Timer->CR1 |= (0x01<<0);
+	Timer->Timer->ARR &= ~(0xFFFF<<0);
+	Timer->Timer->ARR |= (Timer->ARR<<0);
+	Timer->Timer->PSC |= ~(0xFFFF<<0);
+	Timer->Timer->PSC |= (Timer->PSC<<0);
 	
 }
 
@@ -96,6 +99,15 @@ void MyTimer_PWM( TIM_TypeDef * Timer , int Channel ) {
 	}
 }
 
-void set_pulse_pwm(TIM_TypeDef * Timer , int pulse ){
-Timer->CCR1=(Timer->ARR*pulse)/100;
+void set_pulse_pwm_CH1(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR1=(((Timer->ARR)+1)*(rappCyclique/10))/100;
+}
+void set_pulse_pwm_CH2(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR2=(((Timer->ARR)+1)*(rappCyclique/10))/100;
+}
+void set_pulse_pwm_CH3(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR3=(((Timer->ARR)+1)*(rappCyclique/10))/100;
+}
+void set_pulse_pwm_CH4(TIM_TypeDef * Timer , int rappCyclique ){
+Timer->CCR4=(((Timer->ARR)+1)*(rappCyclique/10))/100;
 }
