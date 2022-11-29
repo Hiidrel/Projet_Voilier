@@ -103,7 +103,7 @@ void set_pulse_pwm_CH1(TIM_TypeDef * Timer , int rappCyclique ){
 Timer->CCR1=(((Timer->ARR)+1)*(rappCyclique/10))/100;
 }
 void set_pulse_pwm_CH2(TIM_TypeDef * Timer , int rappCyclique ){
-Timer->CCR2=(((Timer->ARR)+1)*(rappCyclique/10))/100;
+Timer->CCR2=(((Timer->ARR)+1)*(rappCyclique))/100;
 }
 void set_pulse_pwm_CH3(TIM_TypeDef * Timer , int rappCyclique ){
 Timer->CCR3=(((Timer->ARR)+1)*(rappCyclique/10))/100;
