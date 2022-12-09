@@ -2,14 +2,6 @@
 #include <string.h>
 
 void MyGPIO_Init ( MyGPIO_Struct_TypeDef * GPIOStructPtr ){
-	/*if (GPIOStructPtr->GPIO_Pin <8){
-		GPIOStructPtr->GPIO->CRL &= ~(0xF << ((GPIOStructPtr->GPIO_Pin)*4-1));
-		GPIOStructPtr->GPIO->CRL |= (GPIOStructPtr->GPIO_Conf << ((GPIOStructPtr->GPIO_Pin)*4-1));
-	}
-	else{
-		GPIOStructPtr->GPIO->CRH &= ~(0xF << ((GPIOStructPtr->GPIO_Pin-8)*4-1));
-		GPIOStructPtr->GPIO->CRH |= (GPIOStructPtr->GPIO_Conf << ((GPIOStructPtr->GPIO_Pin-8)*4-1));
-	}*/
 	if ((GPIOStructPtr->GPIO_Pin)<8){
 		GPIOStructPtr->GPIO->CRL &= ~((0xF<<(GPIOStructPtr->GPIO_Pin)*4));
 		GPIOStructPtr->GPIO->CRL |= (((GPIOStructPtr->GPIO_Conf)<<(GPIOStructPtr->GPIO_Pin)*4));

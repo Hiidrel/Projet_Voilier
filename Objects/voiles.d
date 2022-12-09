@@ -1,8 +1,8 @@
 .\objects\voiles.o: Drivers\Source\voiles.c
-.\objects\voiles.o: .\Drivers\Include\voiles.h
-.\objects\voiles.o: .\Drivers\Include\DriverVoiles.h
-.\objects\voiles.o: .\Drivers\Include\DriverGirouette.h
-.\objects\voiles.o: .\Drivers\Include\MyGPIO.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\voiles.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\DriverVoiles.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\DriverGirouette.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\MyGPIO.h
 .\objects\voiles.o: C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
 .\objects\voiles.o: .\RTE\_R_el\RTE_Components.h
 .\objects\voiles.o: C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h
@@ -11,7 +11,8 @@
 .\objects\voiles.o: C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h
 .\objects\voiles.o: C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h
 .\objects\voiles.o: C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h
-.\objects\voiles.o: .\Drivers\Include\MyTimer.h
-.\objects\voiles.o: .\Drivers\Include\Roulis.h
-.\objects\voiles.o: .\Drivers\Include\MySPI.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\MyTimer.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\Roulis.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\MySPI.h
 .\objects\voiles.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\voiles.o: ..\tperiph\VOILIER_PROJET\Drivers\Include\MyUART.h

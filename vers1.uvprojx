@@ -428,16 +428,6 @@
               <FileType>1</FileType>
               <FilePath>.\Drivers\Source\voiles.c</FilePath>
             </File>
-            <File>
-              <FileName>MySPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Drivers\Source\MySPI.c</FilePath>
-            </File>
-            <File>
-              <FileName>Roulis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Drivers\Source\Roulis.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -781,7 +771,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Drivers\Include</IncludePath>
+              <IncludePath>..\tperiph\VOILIER_PROJET\Drivers\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -869,16 +859,6 @@
               <FileName>voiles.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Drivers\Source\voiles.c</FilePath>
-            </File>
-            <File>
-              <FileName>MySPI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Drivers\Source\MySPI.c</FilePath>
-            </File>
-            <File>
-              <FileName>Roulis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Drivers\Source\Roulis.c</FilePath>
             </File>
           </Files>
         </Group>

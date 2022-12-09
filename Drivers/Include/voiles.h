@@ -7,6 +7,6 @@
 #include "MyTimer.h"
 
 
-void controleVoiles(void);
+void controleVoiles(int redresser);
 
 #endif
