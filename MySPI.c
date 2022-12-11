@@ -2,8 +2,8 @@
 #include <Driver_GPIO.h>
 
 /**
-	* @brief Configure le SPI spécifié : FSCK = 281kHz, Repos SCK = '1', Front actif = up
-					 Gestion /CS logicielle à part, configure les 4 IO
+	* @brief Configure le SPI spÃ©cifiÃ© : FSCK = 281kHz, Repos SCK = '1', Front actif = up
+					 Gestion /CS logicielle Ã  part, configure les 4 IO
 					 - SCK, MOSI : Out Alt push pull
 					 - MISO : floating input
 					 - /NSS (/CS) : Out push pull
@@ -21,7 +21,7 @@ void MySPI_Init(SPI_TypeDef * SPI){
 	/* enable de la clock et remap de SPI1 */
 	RCC->APB2ENR|=RCC_APB2ENR_SPI1EN;
 	AFIO->MAPR&=~(AFIO_MAPR_SPI1_REMAP);
-	/* init de BaudRate à FSCK=281kHz, replace NSS by SSI, SSI to determine NSS, SSM to manage slave, SPE to enable the SPI */
+	/* init de BaudRate Ã  FSCK=281kHz, replace NSS by SSI, SSI to determine NSS, SSM to manage slave, SPE to enable the SPI */
 	SPI->CR1|=SPI_CR1_BR;
 	SPI->CR1|=SPI_CR1_SSM;
 	SPI->CR1|=SPI_CR1_SSI;
@@ -50,12 +50,15 @@ void MySPI_Init(SPI_TypeDef * SPI){
 }
 
 void MySPI_Send(char ByteToSend){
-	//while(!(SPI1->SR&(SPI_SR_TXE))){};
+	char data;
+	while(!(SPI1->SR&(SPI_SR_TXE))){};
 	SPI1->DR = ByteToSend;
+	data = MySPI_Read();
 }
 
 char MySPI_Read(void){
-	while((SPI1->SR&(SPI_SR_RXNE))){};
+	while(!(SPI1->SR&(SPI_SR_RXNE))){};
+	while(!(SPI1->SR&(SPI_SR_TXE))){};
 	return SPI1->DR;
 }
 
